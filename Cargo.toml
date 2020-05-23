@@ -1,0 +1,16 @@
+[package]
+name = "hexdump-lt"
+version = "0.1.0"
+authors = ["Nicolas BAUW <nbauw@hotmail.com>"]
+edition = "2018"
+
+repository = "https://github.com/nicolasbauw/hexdump-lt"
+categories = ["command-line-utilities", "development-tools"]
+keywords = ["dump", "hexadecimal", "hexdump", "file"]
+description = "An alternative and minimalist, dependency free version of the hexdump utility."
+license = "GPL-3.0"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
