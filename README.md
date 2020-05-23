@@ -1,5 +1,9 @@
 # hexdump-lt
 
+[![Current Crates.io Version](https://img.shields.io/crates/v/hexdump-lt.svg)](https://crates.io/crates/hexdump-lt)
+[![Downloads badge](https://img.shields.io/crates/d/hexdump-lt.svg)](https://crates.io/crates/hexdump-lt)
+
+
 An alternative and minimalist, dependency free version of the hexdump utility.
 
 To install:
