@@ -28,13 +28,15 @@
 //! 00000140 54 00 0A 4D 53 54 37 0A                         |T..MST7.........|
 //! ````
 
+use std::env;
 use std::fs::File;
 use std::io::Read;
-use std::env;
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().collect();
-    if args.len() !=2 { return Ok(()) };
+    if args.len() != 2 {
+        return Ok(());
+    };
 
     let mut f = File::open(&args[1])?;
     let mut byte_counter = 0;
@@ -46,41 +48,49 @@ fn main() -> std::io::Result<()> {
 
     for byte in &data {
         match byte_counter {
-            0 => { print!("{:08X} {:02X} ", address, byte); ascii_data[byte_counter] = *byte },
-            _ => { print!("{:02X} ", byte); ascii_data[byte_counter] = *byte },
+            0 => {
+                print!("{:08X} {:02X} ", address, byte);
+                ascii_data[byte_counter] = *byte
+            }
+            _ => {
+                print!("{:02X} ", byte);
+                ascii_data[byte_counter] = *byte
+            }
         }
-        byte_counter+=1;
+        byte_counter += 1;
 
         // completed a line ? printing ascii data
         if byte_counter == 16 {
             print!("|");
             for i in 0..16 {
-                match data[i+address] {
-                    0x21..=0x7E => print!("{}", char::from(data[i+address])),
+                match data[i + address] {
+                    0x21..=0x7E => print!("{}", char::from(data[i + address])),
                     _ => print!("."),
                 };
-            };
+            }
             println!("|");
             byte_counter = 0;
-            address+=16;
+            address += 16;
         }
     }
 
     // finishing incomplete line
-    let r = 16 - data.len()%16;
-    for _ in 0..r {
-        print!("   ");
-    };
-    print!("|");
-    for i in 0..data.len()%16 {
-        match data[i+address] {
-            0x21..=0x7F => print!("{}", char::from(data[i+address])),
-            _ => print!("."),
-        };
+    let r = 16 - data.len() % 16;
+    if r != 16 {
+        for _ in 0..r {
+            print!("   ");
+        }
+        print!("|");
+        for i in 0..data.len() % 16 {
+            match data[i + address] {
+                0x21..=0x7F => print!("{}", char::from(data[i + address])),
+                _ => print!("."),
+            };
+        }
+        for _ in 0..r {
+            print!(".");
+        }
+        println!("|");
     }
-    for _ in 0..r {
-        print!(".");
-    };
-    println!("|");
     Ok(())
 }
