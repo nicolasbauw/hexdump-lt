@@ -35,7 +35,7 @@ use std::io::Read;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-        return ;
+        return;
     };
 
     let mut f = match File::open(&args[1]) {
@@ -61,11 +61,9 @@ fn main() {
     for byte in &data {
         if byte_counter == 0 {
             print!("{:08X} {:02X} ", address, byte);
-        }
-        else {
+        } else {
             print!("{:02X} ", byte);
         }
-        
         ascii_data[byte_counter] = *byte;
         byte_counter += 1;
 
