@@ -47,16 +47,14 @@ fn main() -> std::io::Result<()> {
     f.read_to_end(&mut data)?;
 
     for byte in &data {
-        match byte_counter {
-            0 => {
-                print!("{:08X} {:02X} ", address, byte);
-                ascii_data[byte_counter] = *byte
-            }
-            _ => {
-                print!("{:02X} ", byte);
-                ascii_data[byte_counter] = *byte
-            }
+        if byte_counter == 0 {
+            print!("{:08X} {:02X} ", address, byte);
         }
+        else {
+            print!("{:02X} ", byte);
+        }
+        
+        ascii_data[byte_counter] = *byte;
         byte_counter += 1;
 
         // completed a line ? printing ascii data
@@ -74,19 +72,23 @@ fn main() -> std::io::Result<()> {
         }
     }
 
-    // finishing incomplete line
+    // finishing incomplete line, with r representing the number of non present bytes required to fill the line
     let r = 16 - data.len() % 16;
     if r != 16 {
         for _ in 0..r {
             print!("   ");
         }
         print!("|");
+
+        // printing remaining bytes
         for i in 0..data.len() % 16 {
             match data[i + address] {
                 0x21..=0x7F => print!("{}", char::from(data[i + address])),
                 _ => print!("."),
             };
         }
+
+        // filling corresponding ascii display area with dots
         for _ in 0..r {
             print!(".");
         }
