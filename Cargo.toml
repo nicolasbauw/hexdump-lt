@@ -5,7 +5,7 @@ authors = ["Nicolas BAUW <nbauw@hotmail.com>"]
 edition = "2018"
 
 repository = "https://github.com/nicolasbauw/hexdump-lt"
-categories = ["command-line-utilities", "development-tools"]
+categories = ["command-line-utilities", "development-tools", "visualization"]
 keywords = ["dump", "hexadecimal", "hexdump", "file"]
 description = "An alternative and minimalist, dependency free version of the hexdump utility."
 license = "GPL-3.0"
