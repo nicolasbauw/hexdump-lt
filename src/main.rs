@@ -32,19 +32,31 @@ use std::env;
 use std::fs::File;
 use std::io::Read;
 
-fn main() -> std::io::Result<()> {
+fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-        return Ok(());
+        return ;
     };
 
-    let mut f = File::open(&args[1])?;
+    let mut f = match File::open(&args[1]) {
+        Ok(f) => f,
+        Err(err) => {
+            println!("{}", err);
+            return;
+        }
+    };
     let mut byte_counter = 0;
     let mut address = 0;
 
     let mut data = Vec::new();
     let mut ascii_data = vec![0; 16];
-    f.read_to_end(&mut data)?;
+    match f.read_to_end(&mut data) {
+        Ok(_) => (),
+        Err(err) => {
+            println!("{}", err);
+            return;
+        }
+    };
 
     for byte in &data {
         if byte_counter == 0 {
@@ -94,5 +106,4 @@ fn main() -> std::io::Result<()> {
         }
         println!("|");
     }
-    Ok(())
 }
