@@ -1,4 +1,4 @@
-//! An alternative and minimalist, dependency free version of the hexdump utility.
+//! A minimalist, dependency free version of the hexdump utility.
 //!
 //! To install:
 //! ```text
@@ -35,11 +35,18 @@ use std::env;
 use std::fs::File;
 use std::io::Read;
 
+static VERSION: &str = env!("CARGO_PKG_VERSION");
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         return;
     };
+
+    if let "-V" | "--version" = args[1].as_ref() {
+                println!("{}", VERSION);
+                return;
+                };
 
     let mut f = match File::open(&args[1]) {
         Ok(f) => f,
