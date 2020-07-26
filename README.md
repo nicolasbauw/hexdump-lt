@@ -4,7 +4,7 @@
 [![Downloads badge](https://img.shields.io/crates/d/hexdump-lt.svg)](https://crates.io/crates/hexdump-lt)
 
 
-An alternative and minimalist, dependency free version of the hexdump utility.
+A minimalist, dependency free version of the hexdump utility.
 
 To install:
 ```
