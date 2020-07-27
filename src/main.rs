@@ -44,9 +44,9 @@ fn main() {
     };
 
     if let "-V" | "--version" = args[1].as_ref() {
-                println!("{}", VERSION);
-                return;
-                };
+        println!("{}", VERSION);
+        return;
+    };
 
     let mut f = match File::open(&args[1]) {
         Ok(f) => f,
