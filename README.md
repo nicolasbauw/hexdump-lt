@@ -37,6 +37,4 @@ hexdump-lt.exe "C:\Users\nbauw\.zoneinfo\America\Phoenix"
 00000140 54 00 0A 4D 53 54 37 0A                         |T..MST7.........|
 ````
 
-[Here](https://techblog.pagesperso-orange.fr/) you can download binaries for Windows / Linux.
-
 License: GPL-3.0
