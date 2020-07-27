@@ -50,8 +50,8 @@ fn main() {
 
     let mut f = match File::open(&args[1]) {
         Ok(f) => f,
-        Err(err) => {
-            println!("{}", err);
+        Err(_) => {
+            println!("Cannot open file");
             return;
         }
     };
@@ -60,12 +60,9 @@ fn main() {
 
     let mut data = Vec::new();
     let mut ascii_data = vec![0; 16];
-    match f.read_to_end(&mut data) {
-        Ok(_) => (),
-        Err(err) => {
-            println!("{}", err);
-            return;
-        }
+    if f.read_to_end(&mut data).is_err() {
+        println!("Cannot read file");
+        return;
     };
 
     for byte in &data {
