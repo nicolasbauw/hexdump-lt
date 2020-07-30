@@ -35,7 +35,7 @@ use std::env;
 use std::fs::File;
 use std::io::Read;
 
-static VERSION: &str = env!("CARGO_PKG_VERSION");
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn main() {
     let args: Vec<String> = env::args().collect();
