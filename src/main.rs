@@ -31,9 +31,7 @@
 //! 00000140 54 00 0A 4D 53 54 37 0A                         |T..MST7.........|
 //! ````
 
-use std::env;
-use std::fs::File;
-use std::io::Read;
+use std::{ env, fs::File, io::Read, process };
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -52,7 +50,7 @@ fn main() {
         Ok(f) => f,
         Err(_) => {
             println!("Cannot open file");
-            return;
+            process::exit(1);
         }
     };
     let mut byte_counter = 0;
@@ -62,7 +60,7 @@ fn main() {
     let mut ascii_data = vec![0; 16];
     if f.read_to_end(&mut data).is_err() {
         println!("Cannot read file");
-        return;
+        process::exit(1);
     };
 
     for byte in &data {
